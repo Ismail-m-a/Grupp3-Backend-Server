@@ -1,7 +1,5 @@
-# TTFHW - Den backend-koden implementerar flera säkerhetsåtgärder bland annat: 
-
-## Inplementerar Säkerhet mot Brute Force-attacker, Clickjacking,  Brute Force-attacker
-
+# TTFHW - Backend-server 
+Backend-server koden implementerar flera säkerhetsåtgärder. Nedan beskrivs de viktigaste funktionerna och hur du kommer igång.
 
 ## Funktioner:
 

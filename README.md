@@ -18,7 +18,7 @@
    - Tillämpar Content Security Policy för att begränsa källor för olika typer av resurser.
 
 4. **Miljövariabler:**
-   - Laddar miljövariabler från en `.env`-fil med `dotenv`.
+   - Laddar miljövariabler från en `.env`-fil med `dotenv` och lägger till filen i .gitignore för att undvika att den spåras av Git.
 
 5. **Skydd mot ogiltiga förfrågningar:**
    - Implementerar rate limiting för alla förfrågningar till denna route.

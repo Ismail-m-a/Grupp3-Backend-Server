@@ -1,19 +1,52 @@
-Den backend-koden implementerar flera säkerhetsåtgärder bland annat: inplementera den här koden med Säkerhet mot Brute Force-attacker, Clickjacking,  Brute Force-attacker
+# TTFHW - Den backend-koden implementerar flera säkerhetsåtgärder bland annat: 
 
-1. **Helmet Middleware:** Använder Helmet för att sätta säkra headers och skydda mot vissa webbaserade attacker genom att automatisera inställningar som Content Security Policy (CSP), Strict-Transport-Security (HSTS), och X-Content-Type-Options.
+## Inplementerar Säkerhet mot Brute Force-attacker, Clickjacking,  Brute Force-attacker
 
-2. **Rate Limiting (Express Rate Limit):** Implementerar rate limiting för att förhindra Brute Force-attacker. Begränsar antalet förfrågningar från en enskild IP-adress under en viss tidsperiod.
 
-3. **JWT-Verifiering:** Verifierar JSON Web Tokens (JWT) för att säkerställa att användaren är giltig och har rätt behörighet. Om tokenet inte kan verifieras eller om användarrollen inte är 'admin', skickas ett 401-felmeddelande.
-Content Security Policy (CSP)
-5. CONTENT SECURITY POLICY HEADER: Content Security Policy (CSP) för att begränsa typerna av innehåll som kan köras på en webbsida. CSP-headers kan sättas för att definiera tillåtna källor för skript, stilar och andra resurser.
-Sammanfattningsvis används Helmet för att stärka HTTP-säkerheten genom att hantera headers, rate limiting används för att förhindra Brute Force-attacker, och JWT-verifiering implementeras för att autentisera och hantera användarbehörigheter och dessutom Content Security Policy (CSP) för att begränsa typerna av innehåll som kan köras på en webbsida.
+## Funktioner:
 
-   Bcrypt:
-Inkluderar både Hashing och Saltning för säker lösenordshantering och gör det svårare att utföra brute-force-attacker. Lösenorden lagras inte i klartext. Istället används bcrypt för att hasha och jämföra lösenord. Detta ökar säkerheten genom att skydda lösenord mot avslöjande även om databasen komprometteras. Bcrypt har vi med eftersom det är säkrare att ha något skydd än inget. Detta ser vi som en säkerhetsstandard för alla projekt framöver. 
+1. **Autentisering med JWT:**
+   - Implementerar autentisering med JSON Web Token (JWT).
+   - Använder `jsonwebtoken` för att skapa och verifiera tokens.
 
-7. Express rate limit:
-Begränsar användarens inloggningsförsök och bestämmer en tid där det inte går att logga in. I vårt fall så får användaren max tre försök att logga in efter det så kan användaren inte ens försöka att logga in förrän 15 minuter har passerat. Vi använder detta för att det ökar säkerheten mot eventuella attacker bland annat brute force. Genom att hålla tidsbegränsningen till 15 minuter så behåller vi samtidigt användarvänligheten för den som råkar skriva fel inloggningsuppgifter.  
+2. **Rate Limiting:**
+   - Inkluderar rate limiting för att förhindra Brute Force-attacker.
+   - Begränsar varje IP till högst 5 förfrågningar per 15 minuter.
 
-8. Cors:
-Cors kontrollerar hur webbsidor på en domän interagerar med resurser på andra domäner. 
+3. **Säkerhetsheaders med Helmet:**
+   - Använder `helmet` för att ställa in säkra headers och skydda mot vissa attacker.
+   - Tillämpar Content Security Policy för att begränsa källor för olika typer av resurser.
+
+4. **Miljövariabler:**
+   - Laddar miljövariabler från en `.env`-fil med `dotenv`.
+
+5. **Skydd mot ogiltiga förfrågningar:**
+   - Implementerar rate limiting för alla förfrågningar till denna route.
+   - Tillämpar åtgärder vid ogiltiga förfrågningar och ger lämpliga meddelanden.
+
+6. **Åtkomst till konfidentiell data:**
+   - Tillhandahåller en enkel GET-route (`/`) för att få åtkomst till konfidentiell data.
+   - Kräver giltig JWT-token i authorization headern för åtkomst.
+
+## Kom igång:
+
+1. **Installera beroenden:**
+   ```bash
+   npm install
+   ```
+
+2. **Konfigurera miljövariabler:**
+   - Skapa en `.env`-fil med `JWT_SECRET` och andra nödvändiga variabler.
+
+3. **Kör applikationen:**
+   ```bash
+   npm start
+   ```
+
+4. **Använd API-routen:**
+   - Gör en GET-förfrågan till `/` med en giltig JWT-token i authorization headern.
+
+## Noteringar:
+- Se till att miljövariablerna är korrekt inställda innan du kör applikationen.
+- Använder Content Security Policy för att förbättra webbsäkerheten.
+- Vid problem eller frågor, referera till [https://github.com/Ismail-m-a/Grupp3-Backend-Server).
